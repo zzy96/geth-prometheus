@@ -2,15 +2,10 @@ version: '2.2'
 
 services:
 
-  geth:
-    image: ethereum/client-go:latest
-    command: --goerli --metrics --metrics.expensive --pprof --pprofaddr=0.0.0.0
-
   prometheus:
     image: prom/prometheus
-    depends_on:
-      geth:
-        condition: service_started
+    ports:
+      - "9090:9090"
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
 
